@@ -2,12 +2,18 @@
 
 ### Design Patterns com Java: Dos Clássicos (GoF) ao Spring Framework
 
-#### Padrões utizados
+#### Design Patterns
 - Singleton
 - Strategy
 
-## Documentation
 
+#### Tools
+- JUnit
+- Jacoco
+- Swagger
+
+
+## Documentation
 http://localhost:8080/swagger-ui/index.html
 
 
