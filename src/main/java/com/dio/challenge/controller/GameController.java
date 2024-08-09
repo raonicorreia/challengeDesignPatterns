@@ -2,7 +2,7 @@ package com.dio.challenge.controller;
 
 import com.dio.challenge.common.GameType;
 import com.dio.challenge.dataaccess.model.Game;
-import com.dio.challenge.service.GameService;
+import com.dio.challenge.service.base.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

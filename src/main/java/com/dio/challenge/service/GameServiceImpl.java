@@ -1,11 +1,12 @@
-package com.dio.challenge.service.base;
+package com.dio.challenge.service;
 
+import com.dio.challenge.common.AppUtil;
 import com.dio.challenge.common.GameType;
 import com.dio.challenge.dataaccess.model.Game;
 import com.dio.challenge.dataaccess.repository.GameRepository;
 import com.dio.challenge.exception.InvalidGameException;
 import com.dio.challenge.exception.ThereIsAlreadyGameException;
-import com.dio.challenge.service.GameService;
+import com.dio.challenge.service.base.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class GameImpl implements GameService {
+public class GameServiceImpl implements GameService {
 
     private final GameRepository repository;
 
     @Autowired
-    public GameImpl(GameRepository repository) {
+    public GameServiceImpl(GameRepository repository) {
         this.repository = repository;
     }
 
@@ -33,7 +34,7 @@ public class GameImpl implements GameService {
         if (outOfRange) {
             throw new InvalidGameException("Os números deverão estar entre 1 e " + gameType.getPossibilities());
         }
-        String orderedNumbers = this.numbersToString(numbers);
+        String orderedNumbers = AppUtil.numbersToString(numbers);
         if (!checkGame(gameType, numbers)) {
             Game game = new Game();
             game.setNumbers(orderedNumbers);
@@ -50,7 +51,7 @@ public class GameImpl implements GameService {
 
     @Override
     public boolean checkGame(GameType gameType, HashSet<Integer> numbers) {
-        String orderedNumbers = this.numbersToString(numbers);
+        String orderedNumbers = AppUtil.numbersToString(numbers);
         Optional<Game> exist = repository.findGameByNumbersAndGameType(orderedNumbers, gameType);
         // TODO Retornar quais numeros foram acertados
         // Os acertos podem varias conforme o tipo do jogo: gameType.getVictoryWithMoreThan()
@@ -58,10 +59,5 @@ public class GameImpl implements GameService {
         return exist.isPresent();
     }
 
-    private String numbersToString(HashSet<Integer> numbers) {
-        // HasSet me garante a ordem correta dos números
-        return String.join(";", numbers.stream()
-                .map(number -> Integer.toString(number))
-                .collect(Collectors.toList()));
-    }
+
 }

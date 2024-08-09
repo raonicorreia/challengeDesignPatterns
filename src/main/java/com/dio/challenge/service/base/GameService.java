@@ -1,4 +1,4 @@
-package com.dio.challenge.service;
+package com.dio.challenge.service.base;
 
 import com.dio.challenge.common.GameType;
 import com.dio.challenge.dataaccess.model.Game;
